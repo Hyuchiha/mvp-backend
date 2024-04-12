@@ -34,7 +34,7 @@ const getProducts = async (query) => {
 
   const response = await new Parse.Query(new Product())
     .includeAll()
-    .descending('name')
+    .descending('createdAt')
     .limit(+limit || 10)
     .skip(skip)
     .withCount(true)
