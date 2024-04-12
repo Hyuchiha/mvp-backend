@@ -1,19 +1,14 @@
-const mongoose = require('mongoose');
+const Parse = require('parse/node');
 const app = require('./app');
 const config = require('./config/config');
 const logger = require('./config/logger');
 
-// Mongoose Strict Query Deprecation Warning suppression
-mongoose.set('strictQuery', false);
-
-let server;
-
-mongoose.connect(config.mongoose.url, config.mongoose.options).then(() => {
-  logger.info('Connected to MongoDB');
-  server = app.listen(config.port, () => {
-    logger.info(`Listening to port ${config.port}`);
-  });
+const server = app.listen(config.port, () => {
+  logger.info(`Listening to port ${config.port}`);
 });
+
+Parse.initialize(config.parse.id, config.parse.key, config.parse.masterKey);
+Parse.serverURL = config.parse.url;
 
 const exitHandler = () => {
   if (server) {
