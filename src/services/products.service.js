@@ -1,6 +1,5 @@
 const httpStatus = require('http-status');
 const Parse = require('parse/node');
-const { da } = require('@faker-js/faker');
 const ApiError = require('../utils/ApiError');
 
 const Product = Parse.Object.extend('Product');
